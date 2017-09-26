@@ -372,7 +372,9 @@ void SmugTalker::createAlbum(const SmugAlbum& album)
 bool SmugTalker::addPhoto(const QString& imgPath,
                           qint64 albumID,
                           const QString& albumKey,
-                          const QString& caption)
+                          const QString& caption,
+                          const QStringList& keywords
+                         )
 {
     if (m_reply)
     {
@@ -395,6 +397,7 @@ bool SmugTalker::addPhoto(const QString& imgPath,
     long long imgSize  = imgFile.size();
     QByteArray imgData = imgFile.readAll();
     imgFile.close();
+    QString keywordsJoined = keywords.join(QString::fromLatin1(","));
 
     MPForm form;
 
@@ -403,6 +406,7 @@ bool SmugTalker::addPhoto(const QString& imgPath,
         QCryptographicHash::hash(imgData, QCryptographicHash::Md5).toHex()));
     form.addPair(QString::fromLatin1("AlbumID"),      QString::number(albumID));
     form.addPair(QString::fromLatin1("AlbumKey"),     albumKey);
+    form.addPair(QString::fromLatin1("Keywords"),     keywordsJoined);
     form.addPair(QString::fromLatin1("ResponseType"), QString::fromLatin1("REST"));
 
     if (!caption.isEmpty())

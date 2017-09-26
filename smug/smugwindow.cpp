@@ -790,12 +790,12 @@ void SmugWindow::uploadNextPhoto()
             return;
         }
 
-        res = m_talker->addPhoto(m_tmpPath, m_currentAlbumID, m_currentAlbumKey, info.description());
+        res = m_talker->addPhoto(m_tmpPath, m_currentAlbumID, m_currentAlbumKey, info.description(), info.keywords());
     }
     else
     {
         m_tmpPath.clear();
-        res = m_talker->addPhoto(imgPath.toLocalFile(), m_currentAlbumID, m_currentAlbumKey, info.description());
+        res = m_talker->addPhoto(imgPath.toLocalFile(), m_currentAlbumID, m_currentAlbumKey, info.description(), info.keywords());
     }
 
     if (!res)

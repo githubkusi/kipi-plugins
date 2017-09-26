@@ -69,7 +69,9 @@ public:
 
     bool    addPhoto(const QString& imgPath, qint64 albumID,
                      const QString& albumKey,
-                     const QString& caption);
+                     const QString& caption,
+                     const QStringList& keywords
+                    );
     void    getPhoto(const QString& imgPath);
 
 Q_SIGNALS:
